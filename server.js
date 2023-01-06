@@ -1,25 +1,13 @@
+const { response } = require('express');
 const express = require('express');
 const app = express();
-// const cors = require('cors')
+const cors = require('cors')
 
 //-- Security
-// app.use(cors())
+app.use(cors())
 
 //-- Needed for a post request
-// app.use(express.json())
-
-app.set('port', 3001);
-app.locals.title = 'The Source';
-
-app.get('/', (request, response) => {
-  response.send('Oh hey The Source');
-});
-
-app.listen(app.get('port'), () => {
-  console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
-});
-
-
+app.use(express.json())
 
 app.locals.music = [
     {
@@ -56,14 +44,33 @@ app.locals.music = [
       },
 ]
 
-// app.set('port', 3001)
-// app.listen(app.get('port', () => {
-// 	console.log(`${ app.locals.title } is now running on port http://localhost:${app.get('port')}!`)
-// }))
+app.set('port', 3001);
+app.locals.title = 'The Source';
+
+app.get('/', (request, response) => {
+  response.send('Oh hey The Source');
+});
+
+app.listen(app.get('port'), () => {
+  console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
+});
+
+// app.get('/music', (request, response) => {
+//     const music = app.locals.music
+// 	response.status(200).json({music})
+// })
 
 app.get('/music', (request, response) => {
-    const music = app.locals.music
-	response.status(200).json({music})
+    response.status(200).json(app.locals.music);
+  });
+
+app.post('/music', (request, response) => {
+    const id = Date.now()
+    const { coverArt, artist, genre, title, audioFile } = request.body
+    
+    app.locals.pets.push({ id, coverArt, artist, genre, title, audioFile })
+
+    response.status(201).json({ id, coverArt, artist, genre, title, audioFile })
 })
 
 // app.get('/music/:id', (request, response) => {
