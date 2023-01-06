@@ -55,15 +55,14 @@ app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
 });
 
-// app.get('/music', (request, response) => {
-//     const music = app.locals.music
-// 	response.status(200).json({music})
-// })
-
 app.get('/music', (request, response) => {
-    response.status(200).json(app.locals.music);
-  });
+    const music = app.locals.music
+	response.status(200).json({music})
+})
 
+// app.get('/music', (request, response) => {
+//     response.status(200).json(app.locals.music);
+//   });
 
 app.post('/music', (request, response) => {
     const id = Date.now();
