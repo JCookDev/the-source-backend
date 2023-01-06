@@ -66,8 +66,18 @@ app.get('/music', (request, response) => {
 
 app.post('/music', (request, response) => {
     const id = Date.now()
-    const { coverArt, artist, genre, title, audioFile } = request.body
-    
+    const music = request.body
+
+    for (let requiredParameter of ['id', 'coverArt', 'artist', 'genre', 'title', 'audioFile']) {
+        if (!music[requiredParameter]) {
+          response
+            .status(422)
+            .send({ error: `Expected format: { id: <Number>, coverArt: <String>, artist: <String>, genre: <String>, title: <String>, audioFile: <String> }. You're missing a "${requiredParameter}" property.` });
+        }
+      }
+
+    const { coverArt, artist, genre, title, audioFile } = music
+
     app.locals.pets.push({ id, coverArt, artist, genre, title, audioFile })
 
     response.status(201).json({ id, coverArt, artist, genre, title, audioFile })
