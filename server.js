@@ -70,7 +70,7 @@ app.post('/music', (request, response) => {
 
     app.locals.music.push({ id, coverArt, artist, genre, title, audioFile });
 
-    response.status(201).json({ id, coverArt, artist, genre, title, audioFile });
+    response.status(201).json(app.locals.music);
 });
 // app.post('/music', (request, response) => {
 //     const id = Date.now()
