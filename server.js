@@ -64,25 +64,40 @@ app.get('/music', (request, response) => {
     response.status(200).json(app.locals.music);
   });
 
+
 app.post('/music', (request, response) => {
-    const id = Date.now()
-    const music = request.body
+    const id = Date.now();
+    const { coverArt, artist, genre, title, audioFile } = request.body;
 
-    for (let requiredParameter of ['id', 'coverArt', 'artist', 'genre', 'title', 'audioFile']) {
-        if (!music[requiredParameter]) {
-          response
-            .status(422)
-            .send({ error: `Expected format: { id: <Number>, coverArt: <String>, artist: <String>, genre: <String>, title: <String>, audioFile: <String> }. You're missing a "${requiredParameter}" property.` });
-        }
-      }
+    app.locals.music.push({ id, coverArt, artist, genre, title, audioFile });
 
-    const { coverArt, artist, genre, title, audioFile } = music
+    response.status(201).json({ id, coverArt, artist, genre, title, audioFile });
+});
+// app.post('/music', (request, response) => {
+//     const id = Date.now()
+//     const music = request.body
 
-    app.locals.pets.push({ id, coverArt, artist, genre, title, audioFile })
+//     for (let requiredParameter of ['id', 'coverArt', 'artist', 'genre', 'title', 'audioFile']) {
+//         if (!music[requiredParameter]) {
+//          /*return */ response
+//             .status(422)
+//             .send({ error: 
+//                 `Expected format: 
+//                 { 
+//                     id: <Number>, 
+//                     coverArt: <String>, 
+//                     artist: <String>, 
+//                     genre: <String>, 
+//                     title: <String>, 
+//                     audioFile: <String> 
+//                 }. You're missing a "${requiredParameter}" property.` 
+//             });
+//         }
+//       }
 
-    response.status(201).json({ id, coverArt, artist, genre, title, audioFile })
-})
+//     const { coverArt, artist, genre, title, audioFile } = music
 
-// app.get('/music/:id', (request, response) => {
+//     app.locals.music.push({ id, coverArt, artist, genre, title, audioFile })
 
+//     response.status(201).json({ id, coverArt, artist, genre, title, audioFile })
 // })
