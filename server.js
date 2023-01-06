@@ -1,25 +1,13 @@
+const { response } = require('express');
 const express = require('express');
 const app = express();
-// const cors = require('cors')
+const cors = require('cors')
 
 //-- Security
-// app.use(cors())
+app.use(cors())
 
 //-- Needed for a post request
-// app.use(express.json())
-
-app.set('port', 3001);
-app.locals.title = 'The Source';
-
-app.get('/', (request, response) => {
-  response.send('Oh hey The Source');
-});
-
-app.listen(app.get('port'), () => {
-  console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
-});
-
-
+app.use(express.json())
 
 app.locals.music = [
     {
@@ -56,16 +44,60 @@ app.locals.music = [
       },
 ]
 
-// app.set('port', 3001)
-// app.listen(app.get('port', () => {
-// 	console.log(`${ app.locals.title } is now running on port http://localhost:${app.get('port')}!`)
-// }))
+app.set('port', 3001);
+app.locals.title = 'The Source';
+
+app.get('/', (request, response) => {
+  response.send('Oh hey The Source');
+});
+
+app.listen(app.get('port'), () => {
+  console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
+});
+
+// app.get('/music', (request, response) => {
+//     const music = app.locals.music
+// 	response.status(200).json({music})
+// })
 
 app.get('/music', (request, response) => {
-    const music = app.locals.music
-	response.status(200).json({music})
-})
+    response.status(200).json(app.locals.music);
+  });
 
-// app.get('/music/:id', (request, response) => {
 
+app.post('/music', (request, response) => {
+    const id = Date.now();
+    const { coverArt, artist, genre, title, audioFile } = request.body;
+
+    app.locals.music.push({ id, coverArt, artist, genre, title, audioFile });
+
+    response.status(201).json({ id, coverArt, artist, genre, title, audioFile });
+});
+// app.post('/music', (request, response) => {
+//     const id = Date.now()
+//     const music = request.body
+
+//     for (let requiredParameter of ['id', 'coverArt', 'artist', 'genre', 'title', 'audioFile']) {
+//         if (!music[requiredParameter]) {
+//          /*return */ response
+//             .status(422)
+//             .send({ error: 
+//                 `Expected format: 
+//                 { 
+//                     id: <Number>, 
+//                     coverArt: <String>, 
+//                     artist: <String>, 
+//                     genre: <String>, 
+//                     title: <String>, 
+//                     audioFile: <String> 
+//                 }. You're missing a "${requiredParameter}" property.` 
+//             });
+//         }
+//       }
+
+//     const { coverArt, artist, genre, title, audioFile } = music
+
+//     app.locals.music.push({ id, coverArt, artist, genre, title, audioFile })
+
+//     response.status(201).json({ id, coverArt, artist, genre, title, audioFile })
 // })
