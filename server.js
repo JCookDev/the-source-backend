@@ -91,6 +91,7 @@ app.get("/music", async (request, response) => {
 
 app.post("/music", async (request, response) => {
   const music = request.body;
+  console.log("request", request)
   for (let requiredParameter of ["id", "coverArt", "artist", "genre", "title", "audioFile"]) {
     if (!music[requiredParameter]) {
       return response
@@ -107,15 +108,16 @@ app.post("/music", async (request, response) => {
       });
     }
   }
-  // try {
-    //     const id = await database('papers').insert(paper, 'id');
-    //     response.status(201).json({ id })
-    //   } catch (error) {
-    //     response.status(500).json({ error });
-    //   }
-    // });
-//     response.status(201).json({ id, coverArt, artist, genre, title, audioFile });
-// });
+  response.status(201).json( request.body );
+  try {
+    const music = await knex('music').insert(request.body, ['id', 'coverArt', 'artist', 'genre', 'titles', 'audioFile'])
+    console.log("music ========================================", music)
+    response.status(201).json()
+  } catch (error) {
+    response.status(500).json(error)
+  }
+  // response.status(201).json({  });
+});
 
 // TRY CATCH POST REQUEST
 // app.post('/api/v1/papers', async (request, response) => {
