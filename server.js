@@ -4,8 +4,8 @@ const cors = require("cors");
 const knex = require("./knex");
 const app = express();
 const bodyParser = require("body-parser");
-app.use(express.json());
-app.use(express.urlencoded());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //-- Security
 app.use(cors());
@@ -90,10 +90,12 @@ app.get("/music", async (request, response) => {
 // });
 
 app.post("/music", async (request, response) => {
+  const music = request.body;
   for (let requiredParameter of ["id", "coverArt", "artist", "genre", "title", "audioFile"]) {
     if (!music[requiredParameter]) {
-      return response.status(422).send({
-        error: `Expected format:
+      return response
+        .status(422)
+        .send({  error: `Expected format:
             {
                 id: <Number>,
                 coverArt: <String>,
@@ -105,9 +107,15 @@ app.post("/music", async (request, response) => {
       });
     }
   }
-
-    response.status(201).json({ id, coverArt, artist, genre, title, audioFile });
-});
+  // try {
+    //     const id = await database('papers').insert(paper, 'id');
+    //     response.status(201).json({ id })
+    //   } catch (error) {
+    //     response.status(500).json({ error });
+    //   }
+    // });
+//     response.status(201).json({ id, coverArt, artist, genre, title, audioFile });
+// });
 
 // TRY CATCH POST REQUEST
 // app.post('/api/v1/papers', async (request, response) => {
