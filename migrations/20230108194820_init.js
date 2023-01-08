@@ -3,13 +3,13 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-    return knex.schema.createTable('music', table => {
+    return knex.schema.createTable('tracks', table => {
         table.increments('id')
-        table.string('cover_art', 500)
+        table.string('coverart', 500)
         table.string('artist', 250)
         table.string('genre', 250)
         table.string('title', 250)
-        table.string('audio_file', 500)
+        table.string('audiofile', 500)
         table.timestamps(true, true)
     })
 };
@@ -19,5 +19,5 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-    return knex.schema.dropTable('music');
+    return knex.schema.dropTable('tracks');
 };
