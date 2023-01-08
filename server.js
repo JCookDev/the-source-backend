@@ -24,14 +24,14 @@ app.get('/', (request, response) => {
  }) 
 
 app.get("/music", async (request, response) => {
-  const music = await knex.select().from("music");
-  response.status(200).json({ music });
+  const tracks = await knex.select().from("tracks");
+  response.status(200).json({ tracks });
 });
 
 app.post("/music", async (request, response) => {
-  const music = request.body;
+  const tracks = request.body;
   for (let requiredParameter of ["coverart", "artist", "genre", "title", "audiofile"]) {
-    if (!music[requiredParameter]) {
+    if (!tracks[requiredParameter]) {
       return response
         .status(422)
         .send({  error: `Expected format:
@@ -47,8 +47,8 @@ app.post("/music", async (request, response) => {
   }
   response.status(201).json( request.body );
   try {
-    const music = await knex('music').insert(request.body, ['id', 'coverart', 'artist', 'genre', 'title', 'audiofile'])
-    response => response.status(201).json({ music })
+    const tracks = await knex('tracks').insert(request.body, ['id', 'coverart', 'artist', 'genre', 'title', 'audiofile'])
+    response => response.status(201).json({ tracks })
   } catch (error) {
     response.status(500).json(error)
   }
