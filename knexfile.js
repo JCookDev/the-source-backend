@@ -12,25 +12,8 @@ module.exports = {
       user: "postgres",
       password: "postgres",
       database: "the-source-backend",
-      // filename: './dev.sqlite3'
     }
   },
-
-  // staging: {
-  //   client: 'postgresql',
-  //   connection: {
-  //     database: 'the-source-backend',
-  //     user:     'username',
-  //     password: 'password'
-  //   },
-  //   pool: {
-  //     min: 2,
-  //     max: 10
-  //   },
-  //   migrations: {
-  //     tableName: 'knex_migrations'
-  //   }
-  // },
 
   production: {
     client: 'postgresql',
@@ -39,17 +22,14 @@ module.exports = {
       ssl: {
         rejectUnauthorized: false,
       },
-      // database: 'the-source-backend',
-      // user:     'username',
-      // password: 'password'
     },
     pool: {
       min: 2,
       max: 10
     },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
+    // migrations: {
+    //   tableName: 'knex_migrations'
+    // }
   }
 
 };
