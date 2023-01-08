@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 app.use(express.json());
 
-app.set("port", 3001);
+app.set("port", process.env.PORT || 3001);
 app.locals.title = "The Source";
 
 app.listen(app.get("port"), () => {
