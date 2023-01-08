@@ -17,7 +17,7 @@ app.listen(app.get("port"), () => {
   console.log(`${app.locals.title} is running on http://localhost:${app.get("port")}.`);
 });
 
-app.get("/", async (request, response) => {
+app.get("/music", async (request, response) => {
   const music = await knex.select().from("music");
   response.status(200).json({ music });
 });
