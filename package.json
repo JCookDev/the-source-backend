@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server.js",
+    "start:dev": "nodemon server.js",
     "db:create": "createdb the-source-backend",
     "db:destroy": "dropdb the-source-backend",
     "db:init": "psql -f schema.sql the-source-backend",
