@@ -30,12 +30,13 @@ app.get("/music", async (request, response) => {
 
 app.post("/music", async (request, response) => {
   const tracks = request.body;
-  for (let requiredParameter of ["coverart", "artist", "genre", "title", "audiofile"]) {
+  for (let requiredParameter of ["id", "coverart", "artist", "genre", "title", "audiofile"]) {
     if (!tracks[requiredParameter]) {
       return response
         .status(422)
         .send({  error: `Expected format:
             {
+                id: <Number>,
                 coverart: <String>,
                 artist: <String>,
                 genre: <String>,
