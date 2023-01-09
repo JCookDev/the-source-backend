@@ -21,7 +21,7 @@ app.get('/', (request, response) => {
   response.status(200).json({
     smoke: "test"
   })
- }) 
+ })
 
 app.get("/api/v1/music", async (request, response) => {
   const tracks = await knex.select().from("tracks");
