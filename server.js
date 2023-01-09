@@ -25,7 +25,7 @@ app.get('/', (request, response) => {
 
 app.get("/api/v1/music", async (request, response) => {
   const tracks = await knex.select().from("tracks");
-  response.status(200).json( tracks );
+  response.status(200).json( {tracks} );
 });
 
 app.post("/api/v1/music", async (request, response) => {
