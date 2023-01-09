@@ -2,13 +2,10 @@
   "name": "the-source-backend",
   "version": "1.0.0",
   "description": "",
-  "engines": {
-    "node": "16.15.1"
-  },
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "start:dev": "nodemon server.js",
+    "start": "node server.js",
+    "start:dev": "node server.js",
     "db:create": "createdb the-source-backend",
     "db:destroy": "dropdb the-source-backend",
     "db:init": "psql -f schema.sql the-source-backend",
