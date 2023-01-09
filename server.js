@@ -29,17 +29,41 @@ const app = express();
 // const port = process.env.PORT || 3000;
 const port = process.env.PORT || 8080;
 
-app.get(["/", "/:name"], (req, res) => {
-  greeting = "<h1>Hello From Node on Fly!</h1>";
-  name = req.params["name"];
-  if (name) {
-    res.send(greeting + "</br>and hello to " + name);
-  } else {
-    res.send(greeting);
-  }
-});
+// app.get("/", (req, res) => {
+//     greeting = "<h1>Hello From Node on Fly!</h1>";
+//     // name = req.params["name"];
+//     // if (name) {
+//     //   res.send(greeting + "</br>and hello to " + name);
+//     // } else {
+//       res.send(greeting);
+//     // }
+//   });
+  app.get('/music', (request, response) => {
+    
+  
+    response.json({ music });
+  });
 
-app.listen(port, () => console.log(`HelloNode app listening on port ${port}!`));
+  app.post('/music', (request, response) => {
+    //const id = Date.now();
+    //const { name, type } = request.body;
+    const { coverart, artist, genre, title, audiofile} = request.body
+    // app.locals.pets.push({ id, name, type });
+  
+    response.status(201).json({ id, coverart, artist, genre, title, audiofile });
+  });
+
+// app.get(["/", "/:name"], (req, res) => {
+//   greeting = "<h1>Hello From Node on Fly!</h1>";
+//   name = req.params["name"];
+//   if (name) {
+//     res.send(greeting + "</br>and hello to " + name);
+//   } else {
+//     res.send(greeting);
+//   }
+// });
+
+app.listen(port, () => console.log(`The Source app is now listening on port ${port}!`));
 
 //--- This server works on POSTMAN, but could not deploy on heroku
 
