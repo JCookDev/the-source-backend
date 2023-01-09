@@ -1,4 +1,27 @@
+//--- Simple node server from https://nodejs.org/en/docs/guides/getting-started-guide/
+// On our build, we have info for a host,
+// will add that to GET.
+//CRASHES!
+
+// const http = require('http');
+
+// const hostname = 'the-source.fly.dev';
+// const port = 8080;
+
+// const server = http.createServer((req, res) => {
+//   res.statusCode = 200;
+//   res.setHeader('Content-Type', 'text/plain');
+//   res.end('Hello World');
+// });
+
+// server.listen(port, hostname, () => {
+//   console.log(`Server running at http://${hostname}:${port}/`);
+// });
+
 //--- Simplified server for deployment on fly.io
+// Server says its running and deployed on fly, but
+// can't GET in browser or postman
+//----
 const express = require("express");
 const app = express();
 // const port = process.env.PORT || 3000;
@@ -17,6 +40,10 @@ app.get(["/", "/:name"], (req, res) => {
 app.listen(port, () => console.log(`HelloNode app listening on port ${port}!`));
 
 //--- This server works on POSTMAN, but could not deploy on heroku
+
+//READ - https://discuss.codecademy.com/t/body-parser-deprecated/606183
+// I kept getting an error saying deprecated previously.
+// Try removing body parser
 
 // const express = require("express");
 // const cors = require("cors");
