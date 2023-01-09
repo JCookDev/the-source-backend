@@ -1,3 +1,4 @@
+require("dotenv").config()
 const knex = require("knex");
 const config = require("./knexfile");
 const environment = process.env.DATABASE_URL || "development";
