@@ -10,8 +10,8 @@ module.exports = {
     connection: {
       port: 5432,
       user: process.env.DB_USER,
-      password: "postgres",
-      database: "the-source-backend",
+      password: "",
+      database: "",
     }
   },
 
