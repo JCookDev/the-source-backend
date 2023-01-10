@@ -27,7 +27,7 @@ app.get("/api/v1/music", async (request, response) => {
 
 app.post("/api/v1/music", async (request, response) => {
   const tracks = request.body;
-  const requiredParams = ["id", "coverart", "artist", "genre", "title", "audiofile"]
+  const requiredParams = ["coverart", "artist", "genre", "title", "audiofile"]
   for (let requiredParameter of requiredParams) {
     if (tracks[requiredParameter] === undefined) {
       return response
