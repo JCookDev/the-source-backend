@@ -43,18 +43,18 @@ app.post("/api/v1/music", async (request, response) => {
       });
     }
   }
-  // response.status(201).json( request.body );
 
-      const tracks2 = await knex('tracks').insert(request.body, ['id', 'coverart', 'artist', 'genre', 'title', 'audiofile'])
-      console.log("EXPRESS TRACKS =====", tracks2)
-      response.status(201).json( tracks2[0] )
+      // const tracks2 = await knex('tracks').insert(request.body, ['id', 'coverart', 'artist', 'genre', 'title', 'audiofile'])
+      // console.log("EXPRESS TRACKS =====", tracks2)
+      // response.status(201).json( tracks2[0] )
 
-  // try {
-  //   const tracks = await knex('tracks').insert(request.body, ['id', 'coverart', 'artist', 'genre', 'title', 'audiofile'])
-  //     response.status(201).json({ tracks })
-  // } catch (error) {
-  //   response.status(500).json(error)
-  // }
+  try {
+    const tracks2 = await knex('tracks').insert(request.body, ['id', 'coverart', 'artist', 'genre', 'title', 'audiofile'])
+    console.log("EXPRESS TRACKS =====", tracks2)
+    response.status(201).json( tracks2[0] )
+  } catch (error) {
+    response.status(500).json(error)
+  }
 });
 
 app.listen(app.get("port"), () => {
