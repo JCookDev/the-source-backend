@@ -14,7 +14,6 @@ module.exports = {
       database: "the-source-backend",
     }
   },
-
   production: {
     client: 'postgresql',
     connection: {
