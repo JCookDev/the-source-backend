@@ -29,22 +29,39 @@ const app = express();
 // const port = process.env.PORT || 3000;
 const port = process.env.PORT || 8080;
 
-// app.get("/", (req, res) => {
-//     greeting = "<h1>Hello From Node on Fly!</h1>";
+//// app.get("/", (req, res) => {
+ ////   greeting = "<h1>Hello From Node on Fly!</h1>";
 //     // name = req.params["name"];
 //     // if (name) {
 //     //   res.send(greeting + "</br>and hello to " + name);
 //     // } else {
-//       res.send(greeting);
+////       res.send(greeting);
 //     // }
-//   });
-  app.get('/music', (request, response) => {
-    
-  
-    response.json({ music });
-  });
+////   });
 
-  app.post('/music', (request, response) => {
+//--- this works
+// app.get('/', (request, response) => {
+//   response.status(200).json({
+//     smoke: "test"
+//   })
+//  });
+
+  // app.get('/api/v1/music', async(request, response) => {
+  //   console.log('hope springs', {tracks})
+  //   const tracks = await knex.select().from("tracks");
+  //   response.status(200).json( {tracks} );  
+  // });
+
+  app.get('/', (request, response) => {
+       //console.log('hope springs', {tracks})
+       console.log('helloooo')
+       console.log("attempt 2", tracks)
+       console.log("attempt 3", {tracks})
+        // response.status(200).json( {tracks} );  
+      response.status(200).json(tracks)
+  })
+/*
+  app.post('/api/v1/music', (request, response) => {
     //const id = Date.now();
     //const { name, type } = request.body;
     const { coverart, artist, genre, title, audiofile} = request.body
@@ -52,7 +69,7 @@ const port = process.env.PORT || 8080;
   
     response.status(201).json({ id, coverart, artist, genre, title, audiofile });
   });
-
+*/
 // app.get(["/", "/:name"], (req, res) => {
 //   greeting = "<h1>Hello From Node on Fly!</h1>";
 //   name = req.params["name"];
